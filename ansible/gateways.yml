@@ -1,5 +1,5 @@
 - hosts: gateways
   become: yes
-  user: jrogena
+  user: root
   roles:
     - gateways 

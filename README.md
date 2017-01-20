@@ -9,7 +9,7 @@ You'll need to obtain the password file used to decryp the vaults in this repo (
 
 ```
 cd ansible
-ansible-playbook --ask-su-pass --ask-sudo-pass --vault-password-file=[path to password file] -i inventories/production/hosts gateways.yml
+ansible-playbook --vault-password-file=[path to password file] -i inventories/production/hosts gateways.yml
 ```
 
 
