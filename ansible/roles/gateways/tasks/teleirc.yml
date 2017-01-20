@@ -48,4 +48,10 @@
     dest: /etc/systemd/system/teleirc.service
     owner: root
     group: root
-    mode: 0644 
+    mode: 0644
+
+- name: Start the teleirc service
+  systemd:
+    name: teleirc
+    enabled: True
+    state: restarted 
