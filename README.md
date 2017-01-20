@@ -1,4 +1,4 @@
-## Nairobi GNU/Linux Users Group Telegram - IRC Gateway
+## Nairobi GNU/Linux Users Group Telegram ↔ IRC Gateway
 
 This repository contains playbooks for provisioning the NairobiLUG's Telegram ↔ IRC gateway.
 
@@ -17,8 +17,8 @@ ansible-playbook --vault-password-file=[path to password file] -i inventories/pr
 
 Here's a list of commands you can run while on the NairobiLUG Telegram Group:
 
- - `/command`: Send IRC msg without nick prefix
- - `/me`: Send action message
+ - `/me`: Send IRC message using your Telegram identity
+ - `/command`: Send plain IRC message. Suitable for sending messages to bots like [nairobi-bot](https://github.com/nairobilug/nairobi-bot) living on the IRC channel
  - `/names`: List users on IRC
  - `/topic`: Get IRC channel topic
  - `/version`: Show version of teleirc
