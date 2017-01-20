@@ -1,0 +1,12 @@
+[Unit]
+Description=teleirc
+After=network-online.target oidentd.socket
+
+[Service]
+ExecStart=/usr/bin/env node {{ teleirc_install_path }}/teleirc/bin/teleirc
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+User={{ teleirc_user }}
+
+[Install]
+WantedBy=default.target

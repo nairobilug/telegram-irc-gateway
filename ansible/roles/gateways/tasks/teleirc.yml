@@ -1,0 +1,51 @@
+---
+- name: Install Debian packages
+  when: ansible_os_family == "Debian"
+  apt: name={{ item }} state=latest update_cache=true cache_valid_time=3600
+  with_items:
+    - libicu-dev
+    - nodejs-legacy
+    - npm
+
+- name: Create teleirc group
+  group:
+    name: "{{ teleirc_group }}"
+    state: present
+
+- name: Create teleirc user
+  user:
+    name: "{{ teleirc_user }}"
+    group: "{{ teleirc_group }}"
+    state: present
+
+- name: Install teleirc
+  become: true
+  become_user: "{{ teleirc_user }}"
+  npm:
+    name: teleirc
+    path: "{{ teleirc_install_path }}"
+
+- name: Create teleirc config directory
+  file:
+    path: "/home/{{ teleirc_user }}/.teleirc"
+    state: directory
+
+- name: Copy teleirc config
+  template:
+    src: templates/teleirc/config.js.j2
+    dest: "/home/{{ teleirc_user }}/.teleirc/config.js"
+    mode: 0644
+
+- name: Change teleirc user files ownership
+  file:
+    path: "/home/{{ teleirc_user }}"
+    owner: "{{ teleirc_user }}"
+    group: "{{ teleirc_group }}"
+
+- name: Copy teleirc systemd unit file
+  template:
+    src: templates/teleirc/teleirc.service.j2
+    dest: /etc/systemd/system/teleirc.service
+    owner: root
+    group: root
+    mode: 0644 
